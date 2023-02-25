@@ -1,0 +1,245 @@
+= Solution "Variables"
+:icons: font
+:hardbreaks-option: 
+:source-language: rust
+:source-highlighter: highlightjs
+
+== Variables1.rs
+=== Step 1
+We have the function 
+
+----
+fn main() { 
+    x = 5; 
+    println!("x has the value {}", x); 
+}
+----
+
+An error occurs because `x` has not been given a type.
+
+=== Step 2
+==== Solution
+
+We need to use the `let` function to give variable `x` a type.
+
+----
+fn main() { 
+    #let# x = 5; 
+    println!("x has the value {}", x); 
+}
+----
+
+You will notice that Rust will automatically assign a type to the integer after using the `let` function:
+
+----
+fn main() { 
+    let x: i32 = 5; 
+    println!("x has the value {}", x); 
+}
+----
+
+For pretty much all integer values, Rust will default to a 32-bit integer value. This is really effecient and only needs to be changed in specific instances.
+
+With our changes, the function will print:
+====
+x has the value of 5
+====
+
+== Variables2.rs
+=== Step 1
+We have the function 
+
+----
+fn main() {
+    let x;
+    if x == 10 {
+        println!("x is ten!");
+    } else {
+        println!("x is not ten!");
+    }
+}
+----
+
+An error occurs because the variable `x` has not been given an explicit type or value.
+
+=== Step 2A
+==== Solution
+
+To fix the issue, all we need to do is assign x to a value of an i32 to match the type of the if statement. In the if statement, it states `if x==10`, so we will assign `let x` to some i32 value.
+
+----
+fn main() {
+    let x: i32 = 9;
+    if x == 10 {
+        println!("x is ten!");
+    } else {
+        println!("x is not ten!");
+    }
+}
+----
+
+this will print:
+
+====
+x is not ten!
+====
+
+=== Step 2B
+==== Solution
+
+To fix the issue, we need to assign x to a type and value that matches the type of the if statement. The type can be anything, so long as they match. Rust cannot run the `if` conditional statement if we are comparing 2 different types.
+For example:
+
+----
+fn main() {
+    let x: &str = "eleven";
+    if x == "ten" {
+        println!("x is ten!");
+    } else {
+        println!("x is not ten!");
+    }
+}
+----
+
+this will print:
+
+====
+x is not ten!
+====
+
+== Variables3.rs
+=== Step 1
+We have the function 
+
+----
+fn main() {
+    let x: i32;
+    println!("Number {}", x);
+}
+----
+
+An error occurs because the variable `x` has not been given a value.
+
+=== Step 2
+==== Solution
+To fix the issue, we have to give `x` a type i32 value.
+
+----
+fn main() {
+    let x: i32 = 5;
+    println!("Number {}", x);
+}
+----
+
+this will print:
+
+====
+Number 5
+====
+
+NOTE: You can also change the type of `x` to something else, so long as the value matches the type. So, something like `let x: &str = five` is also valid.
+
+== Variables4.rs
+=== Step 1
+We have the function 
+
+----
+fn main() {
+    let x = 3;
+    println!("Number {}", x);
+    x = 5;
+    println!("Number {}", x);
+}
+----
+
+An error occurs because by default, variables are immutable by default. In the function, the value of `x` is given two values within the same scope. This can only be done if the variable is designated as mutable `mut`.
+
+=== Step 2
+==== Solution
+
+To fix the issue, we have to desginate `x` as mutable.
+
+----
+fn main() {
+    let mut x = 3;
+    println!("Number {}", x);
+    x = 5;
+    println!("Number {}", x);
+}
+----
+
+This will print out:
+
+====
+Number 3
+Number 5
+====
+
+== Variables5.rs
+=== Step 1
+We have the function 
+
+----
+fn main() {
+    let number = "T-H-R-E-E"; 
+    println!("Spell a Number : {}", number);
+    number = 3; 
+    println!("Number plus two is : {}", number + 2);
+}
+----
+
+An error occurs because the type of variable `number` is changing from a string to an i32. Using `mut` doesn't work here because that will not allow for a change in type, but only in value of the same type.
+
+=== Step 2
+==== Solution
+
+We use the concept of _shadowing_. After the variable `number` is used to spell out T-H-R-E-E, it can overshadowed when that variable is introduced later in the function.
+
+To shadow the `number` variable, all we have to do is add `let` in front of the second iteration of `number`.
+
+----
+fn main() {
+    let number: &str = "T-H-R-E-E"; 
+    println!("Spell a Number : {}", number);
+    let number: i32 = 3; 
+    println!("Number plus two is : {}", number + 2);
+}
+----
+
+This will print out:
+
+====
+Spell a Number : T-H-R-E-E
+Number plus two is : 5
+====
+
+== Variables6.rs
+=== Step 1
+We have the function 
+
+----
+const NUMBER = 3;
+fn main() {
+    println!("Number {}", NUMBER);
+}
+----
+
+An error occurs because when a `constant` is declared, the type of the variable _must_ be annotated.
+
+=== Step 2
+==== Solution
+
+The value of the constant is an i32, so we annotate that in the code.
+
+----
+const NUMBER: i32 = 3;
+fn main() {
+    println!("Number {}", NUMBER);
+}
+----
+
+This will print out:
+
+====
+Number 3
+====
