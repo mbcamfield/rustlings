@@ -4,5 +4,49 @@
 :source-language: rust
 :source-highlighter: highlightjs
 
-== Question 1
-=== Step 1
+== Step 1
+We have to create a function `fn calculate_price_of_apples()` that will calculate the price of apples. The apples are 2 rustbucks per apple. If more than 40 apples are bought, then they are only 1 rustbuck per apple (quite the deal!).
+
+The first condition that we will create is for if less than 40 apples are bought.
+
+----
+fn calculate_price_of_apples(num: i32) -> i32 {
+    if num <= 40 {
+        num * 2
+    }
+}
+----
+
+== Step 2
+However impossible it may be, the user might accidentally enter in a value of less than 0. The apples cannot cost a negative amount (and the customer shouldn't have to pay us for their error), so let's create a condition to avoid this error.
+
+----
+fn calculate_price_of_apples(num: i32) -> i32 {
+    if num <= 40 {
+        num * 2
+    }
+    if num < 0 {
+        0
+    }
+}
+----
+
+== Step 3
+
+Finally, if the customer buys more than 40 apples, they should receive the discount of only have to pay one rustbuck per apple. Let's create this final condition.
+
+----
+fn calculate_price_of_apples(num: i32) -> i32 {
+    if num <= 40 {
+        num * 2
+    }
+    if num < 0 {
+        0
+    }
+    else {
+        num
+    }
+}
+----
+
+This final condition will allow all tests in the script to pass. Nice job!
