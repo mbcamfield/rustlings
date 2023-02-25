@@ -1,0 +1,214 @@
+= Solution "Functions"
+:icons: font
+:hardbreaks-option: 
+:source-language: rust
+:source-highlighter: highlightjs
+
+== functions1.rs
+=== Step 1
+We have the function 
+
+----
+fn main() {
+    call_me();
+}
+----
+
+An error occurs because the function `call_me()` is being called from the main function, but does not exist.
+
+=== Step 2
+==== Solution
+To prevent the error, we must define a function `call_me()`.
+
+----
+fn main() {
+    call_me();
+}
+
+call_me()   {
+
+}
+----
+
+This will print nothing to the terminal, but the program will run without error.
+
+== functions2.rs
+=== Step 1
+We have the functions 
+
+----
+fn main() {
+    call_me(3);
+}
+
+fn call_me(num:) {
+    for i in 0..num {
+        println!("Ring! Call number {}", i + 1);
+    }
+}
+----
+
+An error occurs because in the `call_me(num:)` function, an argument is not explicitly annotated.
+
+=== Step 2
+==== Solution
+To prevent the error, we must annotate an argument within the function `call_me(num:)`. Since the function expects an `i32` value, that will be the argument that we annotate.
+
+----
+fn main() {
+    call_me(3);
+}
+
+fn call_me(num: i32) {
+    for i in 0..num {
+        println!("Ring! Call number {}", i + 1);
+    }
+}
+----
+
+This will print to the terminal:
+
+====
+Ring! Call number 1
+Ring! Call number 2
+Ring! Call number 3
+====
+
+== functions3.rs
+=== Step 1
+We have the functions 
+
+----
+fn main() {
+    call_me();
+}
+
+fn call_me(num: u32) {
+    for i in 0..num {
+        println!("Ring! Call number {}", i + 1);
+    }
+}
+----
+
+An error occurs because the function `fn call_me(num: u32)` expects to have a `u32` value passed when called by the main function, but no value exists.
+
+=== Step 2
+==== Solution
+To prevent the error, we have to populate a value to be passed to the function `fn call_me(num: u32)`.
+
+----
+fn main() {
+    call_me(7);
+}
+
+fn call_me(num: u32) {
+    for i in 0..num {
+        println!("Ring! Call number {}", i + 1);
+    }
+}
+----
+
+This will print to the terminal:
+
+====
+Ring! Call number 1
+Ring! Call number 2
+Ring! Call number 3
+Ring! Call number 4
+Ring! Call number 5
+Ring! Call number 6
+Ring! Call number 7
+====
+
+== functions4.rs
+=== Step 1
+We have the functions 
+
+----
+fn main() {
+    let original_price = 51;
+    println!("Your sale price is {}", sale_price(original_price));
+}
+
+fn sale_price(price: i32) -> {
+    if is_even(price) {
+        price - 10
+    } else {
+        price - 3
+    }
+}
+
+fn is_even(num: i32) -> bool {
+    num % 2 == 0
+}
+----
+
+An error occurs because in the function `sale_price(price: i32) -> `, a return value type is not annotated. Rust requires the value type to be annotated in the function if a function is returning a value.
+
+=== Step 2
+==== Solution
+To prevent the error, we have to define a type in the conversion.
+
+----
+fn main() {
+    let original_price = 51;
+    println!("Your sale price is {}", sale_price(original_price));
+}
+
+fn sale_price(price: i32) -> i32{
+    if is_even(price) {
+        price - 10
+    } else {
+        price - 3
+    }
+}
+
+fn is_even(num: i32) -> bool {
+    num % 2 == 0
+}
+----
+
+This will print to the terminal:
+
+====
+Your sale price is 48
+====
+
+== functions5.rs
+=== Step 1
+We have the functions 
+
+----
+fn main() {
+    let answer = square(3);
+    println!("The square of 3 is {}", answer);
+}
+
+fn square(num: i32) -> i32 {
+    num * num;
+    
+}
+----
+
+An error occurs because there is not a value returned from the output of the function `fn square(num: i32) -> i32`. Within the function, only the `num * num;` line exists. Since the line ends with a semicolon `;`, the line is a _statement_ and does not return a value. Only _expressions_ return values.
+
+=== Step 2
+==== Solution
+To prevent this error, we need to remove the semicolon `;` in the `num * num;` line so that a value is returned. Removing the semicolon `;` changes this line from a statement to an expression.
+
+----
+fn main() {
+    let answer = square(3);
+    println!("The square of 3 is {}", answer);
+}
+
+fn square(num: i32) -> i32 {
+    num * num
+    
+}
+----
+This will print to the terminal:
+
+====
+The square of 3 is 9
+====
