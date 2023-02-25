@@ -1,0 +1,104 @@
+= Solution "If"
+:icons: font
+:hardbreaks-option: 
+:source-language: rust
+:source-highlighter: highlightjs
+
+== if1.rs
+=== Step 1
+We have the function 
+
+----
+pub fn bigger(a: i32, b: i32) -> i32{
+
+}
+----
+
+We are tasked with returning the larger value using an `if` statement.
+
+=== Step 2
+==== Solution
+
+We can write a short `if, else` conditional to solve this.
+
+----
+pub fn bigger(a: i32, b: i32) -> i32 {
+    if a > b{
+        a
+    }
+    else {
+        b
+    }
+}
+----
+
+== if2.rs
+=== Step 1
+We have the function and tests:
+
+----
+pub fn foo_if_fizz(fizzish: &str) -> &str {
+    if fizzish == "fizz" {
+        "foo"
+    } else {
+        1
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn foo_for_fizz() {
+        assert_eq!(foo_if_fizz("fizz"), "foo")
+    }
+
+    #[test]
+    fn bar_for_fuzz() {
+        assert_eq!(foo_if_fizz("fuzz"), "bar")
+    }
+
+    #[test]
+    fn default_to_baz() {
+        assert_eq!(foo_if_fizz("literally anything"), "baz")
+    }
+}
+----
+
+We are tasked with
+
+. Getting the script to compile.
+. Get all tests within the script to pass.
+
+=== Step 2
+==== Task 1 Solution
+In the conditional, all returned values must be the same type of `&str`, so the `else` conditional has to be updated. Looking at the test functions, we know that we will need an `else` case that will return `baz`, so we can update the conditional statement accordingly.
+
+----
+pub fn foo_if_fizz(fizzish: &str) -> &str {
+    if fizzish == "fizz" {
+        "foo"
+    } else {
+        "baz"
+    }
+}
+----
+
+=== Step 3
+==== Task 2 Solution
+After replacing the `else` conditional, we still need a conditional statement to fulfill the second test case to return `bar` if `fizzish == fuzz`.
+
+----
+pub fn foo_if_fizz(fizzish: &str) -> &str {
+    if fizzish == "fizz" {
+        "foo"
+    } else if fizzish == "fuzz"{
+        "bar"
+    } else {
+        "baz"
+    }
+}
+----
+
+The compiled script confirms that the inclusion of this conditional statement will allow all tests to pass.
